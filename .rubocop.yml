@@ -1,0 +1,13 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  DisplayCopNames: true
+  NewCops: enable
+  TargetRubyVersion: 2.7.2
+  Exclude:
+    - ".rvm/*"
+    - "bin/*"
+    - "db/schema.rb"
+    - "logs/*"
+    - "tmp/**/*"
