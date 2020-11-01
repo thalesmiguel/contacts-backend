@@ -44,7 +44,7 @@ RSpec.describe ContactsService, type: :service do
 
       context 'when there is a history of updates' do
         before do
-          travel_to Time.local(2020)
+          travel_to Time.zone.local(2020)
           contact.update!(first_name: 'New-Name', last_name: 'New-Last-Name')
           contact.update!(first_name: 'Another-New-Name')
         end

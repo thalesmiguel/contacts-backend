@@ -1,11 +1,12 @@
 # frozen_string_literal: true
 
 module Validators
+  # Validator for phone number format
   class PhoneNumberValidator < ActiveModel::EachValidator
     PHONE_NUMBER_REGEX = %r{
-      \A(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)
-        ?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]
-          ?(?:ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?\z
+      \A(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-.\ \\/]?)
+        ?((?:\(?\d{1,}\)?[\-.\ \\/]?){0,})(?:[\-.\ \\/]
+          ?(?:ext\.?|extension|x)[\-.\ \\/]?(\d+))?\z
     }x.freeze
 
     def validate_each(record, attribute, value)

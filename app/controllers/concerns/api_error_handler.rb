@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# Error handler for API level errors
 module ApiErrorHandler
   extend ActiveSupport::Concern
 

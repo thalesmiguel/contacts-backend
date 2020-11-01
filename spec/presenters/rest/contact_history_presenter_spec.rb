@@ -10,7 +10,7 @@ RSpec.describe Rest::ContactHistoryPresenter, type: :presenter do
     context 'when the versions is present' do
       let(:contact) { create(:contact, first_name: 'Original-First-Name') }
       before do
-        travel_to Time.local(2020)
+        travel_to Time.zone.local(2020)
         contact.update!(first_name: 'New-First-Name')
       end
 
@@ -33,7 +33,7 @@ RSpec.describe Rest::ContactHistoryPresenter, type: :presenter do
     context 'when the versions is not present' do
       let(:versions) { nil }
 
-      it "returns an empty array" do
+      it 'returns an empty array' do
         expect(subject.as_json).to eq([])
       end
     end

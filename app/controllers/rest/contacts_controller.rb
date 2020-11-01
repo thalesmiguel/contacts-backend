@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Rest
+  # Controller for Contacts actions
   class ContactsController < ApplicationController
     # GET /contacts
     def index

@@ -9,7 +9,7 @@ RSpec.describe Rest::ContactPresenter, type: :presenter do
   describe '#as_json' do
     context 'when the model is present' do
       let(:contact) { create(:contact) }
-      before { travel_to Time.local(2020) }
+      before { travel_to Time.zone.local(2020) }
 
       it "presents the model's attributes" do
         expect(subject.as_json).to eq(contact.attributes)
@@ -19,7 +19,7 @@ RSpec.describe Rest::ContactPresenter, type: :presenter do
     context 'when the model is not present' do
       let(:contact) { nil }
 
-      it "returns nil" do
+      it 'returns nil' do
         expect(subject.as_json).to eq(nil)
       end
     end

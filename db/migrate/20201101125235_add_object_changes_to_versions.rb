@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddObjectChangesToVersions < ActiveRecord::Migration[6.0]
   # The largest text column available in all supported RDBMS.
   TEXT_BYTES = 1_073_741_823

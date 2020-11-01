@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 module Validators
+  # Validator for Contact model
   module ContactValidator
     extend ActiveSupport::Concern
 
