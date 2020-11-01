@@ -20,20 +20,20 @@ RSpec.describe Validators::EmailValidator, type: :validator do
     ]
 
     emails.each do |email|
-      it_behaves_like 'a valid attribute' do
+      it_behaves_like 'a valid attribute', email do
         let(:value) { email }
       end
     end
   end
 
   context 'when email is invalid' do
-    emails = [
-      'some_string',
-      'test@@test.com'
+    emails = %w[
+      some_string
+      test@@test.com
     ]
 
     emails.each do |email|
-      it_behaves_like 'an invalid attribute' do
+      it_behaves_like 'an invalid attribute', email do
         let(:value) { email }
       end
     end

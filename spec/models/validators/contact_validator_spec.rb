@@ -28,7 +28,12 @@ RSpec.describe Validators::ContactValidator, type: :validator do
     context 'validating phone_number' do
       it_behaves_like 'a validatable class' do
         let(:attribute) { :phone_number }
-        let(:validators) { [ActiveRecord::Validations::PresenceValidator] }
+        let(:validators) do
+          [
+            ActiveRecord::Validations::PresenceValidator,
+            Validators::PhoneNumberValidator
+          ]
+        end
       end
     end
 
