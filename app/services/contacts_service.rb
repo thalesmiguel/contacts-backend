@@ -2,10 +2,14 @@
 
 # Contact-related service methods
 class ContactsService
-  delegate :all, :find, to: :model
+  delegate :find, to: :model
 
   def initialize
     @model = Contact
+  end
+
+  def all
+    model.all.sorted
   end
 
   def history(id)

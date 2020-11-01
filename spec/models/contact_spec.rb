@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require 'rails_helper'
+require 'support/shared_contexts/shared_contacts'
 require 'support/shared_examples/model_validations'
 
 RSpec.describe Contact, type: :model do
-  context 'validations' do
+  describe 'validations' do
     context 'without a first_name' do
       it_behaves_like 'an invalid model' do
         let(:model) { build(:contact, first_name: nil) }
@@ -50,13 +51,25 @@ RSpec.describe Contact, type: :model do
     end
   end
 
-  context 'versioning' do
+  describe 'versioning' do
     let(:contact) { create(:contact, first_name: 'First-Name') }
 
     with_versioning do
       it 'is versioned' do
         contact.update!(first_name: 'New-First-Name')
         expect(contact).to have_a_version_with(first_name: 'First-Name')
+      end
+    end
+  end
+
+  describe 'scopes' do
+    context '.sorted' do
+      include_context 'named contacts'
+
+      it 'returns a list of sorted contacts' do
+        expect(described_class.sorted.pluck(:first_name, :id)).to eq(
+          [['A-Name', 3], ['B-Name', 2], ['C-Name', 1]]
+        )
       end
     end
   end

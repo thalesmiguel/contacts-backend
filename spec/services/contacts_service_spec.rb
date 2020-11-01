@@ -8,10 +8,10 @@ RSpec.describe ContactsService, type: :service do
 
   describe '#all' do
     context 'when there are Contacts' do
-      include_context 'contacts'
+      include_context 'named contacts'
 
       it 'returns all availabe Contacts' do
-        expect(subject.all).to eq([contact_1, contact_2, contact_3])
+        expect(subject.all).to eq([contact_3, contact_2, contact_1])
       end
     end
 
