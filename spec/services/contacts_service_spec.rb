@@ -51,23 +51,8 @@ RSpec.describe ContactsService, type: :service do
 
         with_versioning do
           it 'returns the history of updates' do
-            expect(subject.history(contact.id)).to eq(
-              [
-                {
-                  updated_at: '2020-01-01 00:00:00.000000000 +0000',
-                  changes: [
-                    { attribute: 'first_name', old_value: 'New-Name', new_value: 'Another-New-Name' }
-                  ]
-                },
-                {
-                  updated_at: '2020-01-01 00:00:00.000000000 +0000',
-                  changes: [
-                    { attribute: 'first_name', old_value: 'Original-First-Name', new_value: 'New-Name' },
-                    { attribute: 'last_name', old_value: 'Original-Last-Name', new_value: 'New-Last-Name' }
-                  ]
-                }
-              ]
-            )
+            expect(subject.history(contact.id).size).to eq(2)
+            expect(subject.history(contact.id).first.class).to eq(PaperTrail::Version)
           end
         end
       end

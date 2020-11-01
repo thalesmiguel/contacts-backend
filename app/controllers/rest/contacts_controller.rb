@@ -4,33 +4,37 @@ module Rest
   class ContactsController < ApplicationController
     # GET /contacts
     def index
-      @contacts = ContactsService.new.all
+      contacts = ContactsService.new.all
 
-      render json: { collection: @contacts }
+      render json: { collection: contacts.each { |contact| ContactPresenter.new(contact).as_json } }
     end
 
     # GET /contacts/:id
     def show
-      render json: ContactsService.new.find(params[:id])
+      render json: ContactPresenter.new(
+        ContactsService.new.find(params[:id])
+      ).as_json
     end
 
     # GET /contacts/:id/history
     def history
-      render json: { collection: ContactsService.new.history(params[:id]) }
+      contact_history = ContactsService.new.history(params[:id])
+
+      render json: { collection: ContactHistoryPresenter.new(contact_history).as_json }
     end
 
     # POST /contacts
     def create
       contact = ContactsService.new.create(contact_params)
 
-      render json: contact, status: :created, location: rest_contact_url(contact.id)
+      render json: ContactPresenter.new(contact).as_json, status: :created, location: rest_contact_url(contact.id)
     end
 
     # PATCH/PUT /contacts/:id
     def update
       contact = ContactsService.new.update(params[:id], contact_params)
 
-      render json: contact
+      render json: ContactPresenter.new(contact).as_json
     end
 
     # DELETE /contacts/:id

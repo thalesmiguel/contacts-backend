@@ -9,12 +9,7 @@ class ContactsService
   end
 
   def history(id)
-    find(id).versions.map do |version|
-      {
-        updated_at: version.created_at,
-        changes: version.changeset.map { |key, val| { attribute: key, old_value: val.first, new_value: val.last } }
-      }
-    end
+    find(id).versions
   end
 
   def create(params)
