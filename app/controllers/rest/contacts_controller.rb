@@ -2,45 +2,43 @@
 
 module Rest
   class ContactsController < ApplicationController
-    before_action :set_contact, only: %i[show update destroy]
-
     # GET /contacts
     def index
-      @contacts = Contact.all
+      @contacts = ContactsService.new.all
 
       render json: { collection: @contacts }
     end
 
     # GET /contacts/:id
     def show
-      render json: @contact
+      render json: ContactsService.new.find(params[:id])
+    end
+
+    # GET /contacts/:id/history
+    def history
+      render json: { collection: ContactsService.new.history(params[:id]) }
     end
 
     # POST /contacts
     def create
-      @contact = Contact.new(contact_params)
-      @contact.save!
+      contact = ContactsService.new.create(contact_params)
 
-      render json: @contact, status: :created, location: rest_contact_url(@contact.id)
+      render json: contact, status: :created, location: rest_contact_url(contact.id)
     end
 
     # PATCH/PUT /contacts/:id
     def update
-      @contact.update!(contact_params)
+      contact = ContactsService.new.update(params[:id], contact_params)
 
-      render json: @contact
+      render json: contact
     end
 
     # DELETE /contacts/:id
     def destroy
-      @contact.destroy
+      ContactsService.new.destroy(params[:id])
     end
 
     private
-
-    def set_contact
-      @contact = Contact.find(params[:id])
-    end
 
     def contact_params
       params.require(:contact).permit(:first_name, :last_name, :email, :phone_number)

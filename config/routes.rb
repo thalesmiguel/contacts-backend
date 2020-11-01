@@ -2,6 +2,10 @@
 
 Rails.application.routes.draw do
   namespace :rest do
-    resources :contacts
+    resources :contacts do
+      member do
+        get :history
+      end
+    end
   end
 end

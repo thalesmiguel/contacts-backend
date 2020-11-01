@@ -49,4 +49,15 @@ RSpec.describe Contact, type: :model do
       end
     end
   end
+
+  context 'versioning' do
+    let(:contact) { create(:contact, first_name: 'First-Name') }
+
+    with_versioning do
+      it 'is versioned' do
+        contact.update!(first_name: 'New-First-Name')
+        expect(contact).to have_a_version_with(first_name: 'First-Name')
+      end
+    end
+  end
 end

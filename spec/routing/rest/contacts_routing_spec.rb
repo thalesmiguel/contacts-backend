@@ -27,5 +27,9 @@ RSpec.describe Rest::ContactsController, type: :routing do
     it 'routes to #destroy' do
       expect(delete: '/rest/contacts/1').to route_to('rest/contacts#destroy', id: '1')
     end
+
+    it 'routes to #history' do
+      expect(get: '/rest/contacts/1/history').to route_to('rest/contacts#history', id: '1')
+    end
   end
 end
