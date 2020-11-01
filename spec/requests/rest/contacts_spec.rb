@@ -44,7 +44,6 @@ RSpec.describe '/contacts', type: :request do
         expect do
           post rest_contacts_url,
                params: { contact: valid_attributes }, headers: valid_headers, as: :json
-
         end.to change(Contact, :count).by(1)
       end
 
@@ -62,7 +61,6 @@ RSpec.describe '/contacts', type: :request do
         expect do
           post rest_contacts_url,
                params: { contact: invalid_attributes }, as: :json
-
         end.to change(Contact, :count).by(0)
       end
 

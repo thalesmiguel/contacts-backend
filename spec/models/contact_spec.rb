@@ -33,6 +33,13 @@ RSpec.describe Contact, type: :model do
       end
     end
 
+    context 'with an invalid email' do
+      it_behaves_like 'an invalid model' do
+        let(:model) { build(:contact, email: 'some_string') }
+        let(:error_messages) { { email: ['is invalid'] } }
+      end
+    end
+
     context 'with duplicated email' do
       let(:previous_contact) { create(:contact) }
 

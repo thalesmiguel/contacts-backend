@@ -11,38 +11,37 @@ RSpec.describe Validators::ContactValidator, type: :validator do
   let(:dummy_class) { ContactDummy }
 
   context 'when included' do
-    context 'validating presence of first_name' do
+    context 'validating first_name' do
       it_behaves_like 'a validatable class' do
         let(:attribute) { :first_name }
-        let(:validation) { ActiveRecord::Validations::PresenceValidator }
+        let(:validators) { [ActiveRecord::Validations::PresenceValidator] }
       end
     end
 
-    context 'validating presence of last_name' do
+    context 'validating last_name' do
       it_behaves_like 'a validatable class' do
         let(:attribute) { :last_name }
-        let(:validation) { ActiveRecord::Validations::PresenceValidator }
+        let(:validators) { [ActiveRecord::Validations::PresenceValidator] }
       end
     end
 
-    context 'validating presence of phone_number' do
+    context 'validating phone_number' do
       it_behaves_like 'a validatable class' do
         let(:attribute) { :phone_number }
-        let(:validation) { ActiveRecord::Validations::PresenceValidator }
+        let(:validators) { [ActiveRecord::Validations::PresenceValidator] }
       end
     end
 
-    context 'validating presence of email' do
+    context 'validating email' do
       it_behaves_like 'a validatable class' do
         let(:attribute) { :email }
-        let(:validation) { ActiveRecord::Validations::PresenceValidator }
-      end
-    end
-
-    context 'validating uniqueness of email' do
-      it_behaves_like 'a validatable class' do
-        let(:attribute) { :email }
-        let(:validation) { ActiveRecord::Validations::UniquenessValidator }
+        let(:validators) do
+          [
+            ActiveRecord::Validations::PresenceValidator,
+            ActiveRecord::Validations::UniquenessValidator,
+            Validators::EmailValidator
+          ]
+        end
       end
     end
   end

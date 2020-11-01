@@ -15,8 +15,8 @@ group :development, :test do
   gem 'factory_bot_rails', '~> 6.1'
   gem 'ffaker', '~> 2.17'
   gem 'pry-byebug', '~> 3.9'
-  gem 'rspec-rails', '~> 4.0'
   gem 'rspec-activemodel-mocks', '~> 1.1'
+  gem 'rspec-rails', '~> 4.0'
 end
 
 group :development do
